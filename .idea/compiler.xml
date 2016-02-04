@@ -23,10 +23,12 @@
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
         <module name="iclick" />
+        <module name="org.iclick.doctor" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="iclick" target="1.5" />
+      <module name="org.iclick.doctor" target="1.5" />
     </bytecodeTargetLevel>
   </component>
 </project>

@@ -5,10 +5,13 @@
  */
 package org.iclick.doctor;
 
+import org.iclick.doctor.beans.User;
+import org.iclick.doctor.dbaccess.DbConnectionManager;
+import org.iclick.doctor.dbaccess.PatientDataAccessManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JDialog;
@@ -20,7 +23,7 @@ import javax.swing.JOptionPane;
  */
 public class FrontDesk extends User {
 
-    private static DbConnecter dbCon = DbConnecter.getConnection();
+    private static DbConnectionManager dbCon = DbConnectionManager.getInstance();
     private Statement st;
     private ResultSet rs;
 
@@ -44,7 +47,7 @@ public class FrontDesk extends User {
     public void changePassword(String name, String oldpass, String newpass) {
 
         try {
-            st = dbCon.getCon().createStatement();
+            st = dbCon.getInstance().createStatement();
             String dbpass = null;
             String query = "UPDATE `user_login` SET `Password`='" + newpass + "' WHERE User_type ='" + name + "'";
             String query2 = "SELECT Password FROM `user_login` WHERE User_type ='" + name + "' ";
@@ -64,7 +67,7 @@ public class FrontDesk extends User {
             }
 
         } catch (SQLException ex) {
-            Logger.getLogger(Patient_DA.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PatientDataAccessManager.class.getName()).log(Level.SEVERE, null, ex);
 
         }
     }

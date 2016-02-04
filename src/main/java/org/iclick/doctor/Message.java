@@ -6,6 +6,10 @@
 
 package org.iclick.doctor;
 
+import org.iclick.doctor.dbaccess.DbConnectionManager;
+import org.iclick.doctor.dbaccess.MessageDataAccessManager;
+import org.iclick.doctor.jFrames.DoctorJFrame;
+
 import java.util.ArrayList;
 
 /**
@@ -17,7 +21,7 @@ public class Message {
     private int patientId;
     private String message;
     private String reply;
-    private Message_DA msg = Message_DA.getConnection(DbConnecter.getConnection());
+    private MessageDataAccessManager msg = MessageDataAccessManager.getConnection(DbConnectionManager.getInstance());
   
     public ArrayList<String>[] getSendersList(){
         ArrayList[] list;
