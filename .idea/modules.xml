@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/iclick.iml" filepath="$PROJECT_DIR$/iclick.iml" />
+      <module fileurl="file://$PROJECT_DIR$/org.iclick.doctor.iml" filepath="$PROJECT_DIR$/org.iclick.doctor.iml" />
     </modules>
   </component>
 </project>

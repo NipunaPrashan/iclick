@@ -1,8 +1,11 @@
 package org.iclick.doctor;
 
-import java.text.SimpleDateFormat;
+import org.iclick.doctor.beans.Prescription;
+import org.iclick.doctor.beans.User;
+import org.iclick.doctor.dbaccess.DbConnectionManager;
+import org.iclick.doctor.dbaccess.PatientDataAccessManager;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  *
@@ -11,23 +14,23 @@ import java.util.Calendar;
 public class Patient extends User {
 
     private Prescription pres;
-    private Patient_DA testp = Patient_DA.getConnection(DbConnecter.getConnection());
+    private PatientDataAccessManager testp = PatientDataAccessManager.getConnection(DbConnectionManager.getInstance());
     private String date;
     private int assingeddoctor;
 
-    public Patient(String name, int id, String paswrd, Patient_DA testp) {
+    public Patient(String name, int id, String paswrd, PatientDataAccessManager testp) {
         super(name, id, paswrd);
         this.testp = testp;
 
     }
 
-    public Patient(int id, Patient_DA testp, String date) {
+    public Patient(int id, PatientDataAccessManager testp, String date) {
         super(id);
         this.testp = testp;
         this.date = date;
     }
     
-    public Patient(int id, Patient_DA testp, String date, int did) {
+    public Patient(int id, PatientDataAccessManager testp, String date, int did) {
         super(id);
         this.testp = testp;
         this.date = date;
@@ -38,38 +41,38 @@ public class Patient extends User {
         super(id);
     }
 
-    public Patient(Patient_DA testp, String date) {
+    public Patient(PatientDataAccessManager testp, String date) {
         this.testp = testp;
         this.date = date;
         //  getList(testp,date);
     }
 
-    public Patient(int pId, Patient_DA testp) {
+    public Patient(int pId, PatientDataAccessManager testp) {
         super(pId);
         this.testp = testp;
     }
 
-    public Patient(String name, String paswrd, Patient_DA testp) {
+    public Patient(String name, String paswrd, PatientDataAccessManager testp) {
         super(name, paswrd);
         this.testp = testp;
     }
 
-    public Patient(String name, Patient_DA testp) {
+    public Patient(String name, PatientDataAccessManager testp) {
         super(name);
         this.testp = testp;
     }
 
-    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String user, String pass, Patient_DA testp) {
+    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String user, String pass, PatientDataAccessManager testp) {
         super(first, last, gender, mobile, BDate, address, user, pass);
         this.testp = testp;
     }
     
-    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String user, String pass, String efirst, String elast, String emobile, Patient_DA testp) {
+    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String user, String pass, String efirst, String elast, String emobile, PatientDataAccessManager testp) {
         super(first, last, gender, mobile, BDate, address, user, pass, efirst, elast, emobile);
         this.testp = testp;
     }
     
-    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String efirst, String elast, String emobile, Patient_DA testp) {
+    public Patient(String first, String last, String gender, String mobile,String BDate, String address, String efirst, String elast, String emobile, PatientDataAccessManager testp) {
         super(first, last, gender, mobile, BDate, address,efirst, elast, emobile);
         this.testp = testp;
     }
@@ -114,54 +117,54 @@ public class Patient extends User {
     }
 
 //    public void updateData() {
-//        testp.getData(this);
+//        testp.getDoctorInfo(this);
 //    }
 
     public void setPres(Prescription pres) {
         this.pres = pres;
     }
 
-    public ArrayList<String> getIDList(Patient_DA testp, String date, int did, String time) {
+    public ArrayList<String> getIDList(PatientDataAccessManager testp, String date, int did, String time) {
         ArrayList<String> list;
         list = testp.getChannelIDList(date,did,time);
         return list;
     }
     
-    public ArrayList<String> getNaturalJoinList(Patient_DA testp, String date) {
+    public ArrayList<String> getNaturalJoinList(PatientDataAccessManager testp, String date) {
         ArrayList<String> list;
         list = testp.getNaturalJoinList(date);
         return list;
     }
 
-    public ArrayList<String> getupdatedList(Patient_DA testp, String date, int did) {
+    public ArrayList<String> getupdatedList(PatientDataAccessManager testp, String date, int did) {
         ArrayList<String> list;
         list = testp.getupdatedPrescription(date,did);
         return list;
     }
 
-    public int channel(int pId, Patient_DA testp, String date, int did, String time) {
+    public int channel(int pId, PatientDataAccessManager testp, String date, int did, String time) {
 
         return testp.channelDoc(pId, date, time, did);
     }
     
-    public void cancellastchannel(int pId, Patient_DA testp, int did) {
+    public void cancellastchannel(int pId, PatientDataAccessManager testp, int did) {
 
         testp.cancellastappointment(pId,did);
     }
 
-    public void deleteChannel(int pId, Patient_DA testp, String date) {
+    public void deleteChannel(int pId, PatientDataAccessManager testp, String date) {
 
         testp.deleteChannel(pId, date);
 
     }
 
-    public ArrayList<String> getAllData(Patient_DA testp, int pId) {
+    public ArrayList<String> getAllData(PatientDataAccessManager testp, int pId) {
         ArrayList<String> list;
         list = testp.getAllData(pId);
         return list;
     }
 
-    public boolean checkChannel(Patient_DA testp, int pId, String Sdate) {
+    public boolean checkChannel(PatientDataAccessManager testp, int pId, String Sdate) {
         boolean status = true;
         status = testp.checktheChannel(pId, Sdate);
         return status;

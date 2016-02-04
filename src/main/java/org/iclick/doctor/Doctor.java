@@ -1,8 +1,11 @@
 package org.iclick.doctor;
 
-import java.text.SimpleDateFormat;
+import org.iclick.doctor.beans.User;
+import org.iclick.doctor.dbaccess.DbConnectionManager;
+import org.iclick.doctor.dbaccess.DoctorDataAccessManager;
+import org.iclick.doctor.dbaccess.PatientDataAccessManager;
+
 import java.util.ArrayList;
-import java.util.Calendar;
 
 /**
  *
@@ -10,7 +13,7 @@ import java.util.Calendar;
  */
 public class Doctor extends User {
 
-    private Doctor_DA testd = Doctor_DA.getConnection(DbConnecter.getConnection());
+    private DoctorDataAccessManager testd = DoctorDataAccessManager.getInstance(DbConnectionManager.getInstance());
     private String date;
     private String first;
     private String last;
@@ -27,7 +30,7 @@ public class Doctor extends User {
         return qualification;
     }
 
-    public Doctor(String name, int id, String paswrd, Doctor_DA testp) {
+    public Doctor(String name, int id, String paswrd, DoctorDataAccessManager testp) {
         super(name, id, paswrd);
         this.testd = testp;
 
@@ -38,7 +41,7 @@ public class Doctor extends User {
 
     }
 
-    public Doctor(int id, Doctor_DA testp, String date) {
+    public Doctor(int id, DoctorDataAccessManager testp, String date) {
         super(id);
         this.testd = testp;
         this.date = date;
@@ -51,7 +54,7 @@ public class Doctor extends User {
     public Doctor() {
     }
 
-    public Doctor(Doctor_DA testp, String date) {
+    public Doctor(DoctorDataAccessManager testp, String date) {
         this.testd = testp;
         this.date = date;
         //  getList(testp,date);
@@ -65,26 +68,26 @@ public class Doctor extends User {
         this.spec = spc;
     }
 
-    public Doctor(int pId, Doctor_DA testp) {
+    public Doctor(int pId, DoctorDataAccessManager testp) {
         super(pId);
         this.testd = testp;
     }
 
-    public Doctor(String name, String paswrd, Doctor_DA testp) {
+    public Doctor(String name, String paswrd, DoctorDataAccessManager testp) {
         super(name, paswrd);
         this.testd = testp;
     }
 
-    public Doctor(String name, Doctor_DA testp) {
+    public Doctor(String name, DoctorDataAccessManager testp) {
         super(name);
         this.testd = testp;
     }
 
     public void savedata(String first, String last, String hospital, String Qualification, String mobile1, String mobile2, int id, ArrayList<Integer> MID) {
-        testd.UpdateData(first, last, hospital, Qualification, mobile1, mobile2, id, MID);
+        testd.UpdateDoctorInfo(first, last, hospital, Qualification, mobile1, mobile2, id, MID);
     }
 
-    public ArrayList<String> getList(Doctor_DA testp, int id) {
+    public ArrayList<String> getList(DoctorDataAccessManager testp, int id) {
         ArrayList<String> list;
         list = testp.availabity(id);
         return list;
@@ -92,47 +95,47 @@ public class Doctor extends User {
 
     public String getpassword(int id) {
         String pass;
-        pass = testd.getpassword(id);
+        pass = testd.getDoctorPassword(id);
         return pass;
     }
 
-    public ArrayList<String> getpatientlastappoinmentdetails(Doctor_DA testp, int pid, int did) {
+    public ArrayList<String> getpatientlastappoinmentdetails(DoctorDataAccessManager testp, int pid, int did) {
         ArrayList<String> details;
         details = testp.lastappointment(pid, did);
         return details;
     }
 
-    public int getavailablecount(Doctor_DA testp, int id) {
+    public int getavailablecount(DoctorDataAccessManager testp, int id) {
         int count = -1;
         count = testp.availabitycount(id);
         return count;
     }
 
-    public ArrayList<String> getNaturalJoinList(Patient_DA testp, String date) {
+    public ArrayList<String> getNaturalJoinList(PatientDataAccessManager testp, String date) {
         ArrayList<String> list;
         list = testp.getNaturalJoinList(date);
         return list;
     }
 
-    public ArrayList<String> getupdatedList(Patient_DA testp, String date, int did) {
+    public ArrayList<String> getupdatedList(PatientDataAccessManager testp, String date, int did) {
         ArrayList<String> list;
         list = testp.getupdatedPrescription(date, did);
         return list;
     }
 
-    public void deleteChannel(int pId, Patient_DA testp, String date) {
+    public void deleteChannel(int pId, PatientDataAccessManager testp, String date) {
 
         testp.deleteChannel(pId, date);
 
     }
 
-    public ArrayList<String> getAllData(Patient_DA testp, int pId) {
+    public ArrayList<String> getAllData(PatientDataAccessManager testp, int pId) {
         ArrayList<String> list;
         list = testp.getAllData(pId);
         return list;
     }
 
-    public boolean checkChannel(Patient_DA testp, int pId, String Sdate) {
+    public boolean checkChannel(PatientDataAccessManager testp, int pId, String Sdate) {
         boolean status = true;
         status = testp.checktheChannel(pId, Sdate);
         return status;
@@ -145,7 +148,7 @@ public class Doctor extends User {
     }
 
     public void savedata() {
-        testd.saveData(first, last, getHospital(), getQualification(),spec);
+        testd.registerDoctorInfo(first, last, getHospital(), getQualification(),spec);
 
     }
     

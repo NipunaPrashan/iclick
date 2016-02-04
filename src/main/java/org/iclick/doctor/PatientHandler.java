@@ -1,7 +1,8 @@
 
 package org.iclick.doctor;
 
-import java.util.List;
+import org.iclick.doctor.dbaccess.PatientDataAccessManager;
+
 import java.util.ArrayList;
 
 /**
@@ -9,9 +10,9 @@ import java.util.ArrayList;
  * @author Prashan
  */
 public class PatientHandler {
-   Patient_DA patient_da = Patient_DA.getConnection();
+   PatientDataAccessManager patient_da = PatientDataAccessManager.getConnection();
     
-   public void makenewpatient(String f,int id,String pass, Patient_DA pda){
+   public void makenewpatient(String f,int id,String pass, PatientDataAccessManager pda){
        
        Patient p1 = new Patient(f,id,pass,pda); 
        p1.sendData();
