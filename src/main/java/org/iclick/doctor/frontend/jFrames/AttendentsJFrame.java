@@ -1,4 +1,4 @@
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.*;
 import org.iclick.doctor.beans.Prescription;
@@ -23,7 +23,7 @@ import javax.swing.table.TableColumn;
 public class AttendentsJFrame extends javax.swing.JFrame {
 
     private DbConnectionManager db = DbConnectionManager.getInstance();
-    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance(db);
+    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance();
     private DefaultTableModel model;
     private Calendar currentDate = Calendar.getInstance();
     private int total = 0;
@@ -239,7 +239,7 @@ public class AttendentsJFrame extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         dispose();
-        LoginJFrame out = new LoginJFrame();
+        org.iclick.doctor.frontend.jFrames.LoginJFrame out = new LoginJFrame();
         out.setLocationRelativeTo(null);
         out.setVisible(true);
         //dispose();
@@ -385,8 +385,8 @@ public class AttendentsJFrame extends javax.swing.JFrame {
     public void addmodel() {
 
         ArrayList<String> doctors = new ArrayList<String>();
-        doctors = doctor_da.getnamestospecificarea(selectedsarea);
-        ddcount = doctor_da.getselecteddDoctorCount(selectedsarea);
+        doctors = doctor_da.getNamesToSpecificArea(selectedsarea);
+        ddcount = doctor_da.getSelectedDoctorCount(selectedsarea);
         int i;
         String temp;
         for (i = 0; i < ddcount; i++) {

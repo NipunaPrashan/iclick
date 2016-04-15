@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.dbaccess.DbConnectionManager;
 import org.iclick.doctor.Doctor;

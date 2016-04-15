@@ -1,4 +1,4 @@
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.*;
 import org.iclick.doctor.dbaccess.DbConnectionManager;
@@ -36,7 +36,7 @@ public class DoctorJFrame extends javax.swing.JFrame {
     private int firstTimeTable = 0;
     public static int doctorId;
     private String selectedtime;
-    private String finalDay = DoctorMain.finalDay;
+    private String finalDay = Main.finalDay;
     String[] parts2;
     int nowtimedate;
 
@@ -601,7 +601,7 @@ public class DoctorJFrame extends javax.swing.JFrame {
 
         ArrayList<String> dates = new ArrayList<String>();
         int datecount;
-        dates = doctor_da.gettimes(doctorId, finalDay);
+        dates = doctor_da.getDoctorAvailableTimesForSpecificDay(doctorId, finalDay);
         System.out.println("dId"+ doctorId);
         System.out.println("finalday"+ finalDay);
         datecount = dates.size();

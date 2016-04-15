@@ -10,7 +10,7 @@ import org.iclick.doctor.Doctor;
 import org.iclick.doctor.Patient;
 import org.iclick.doctor.dbaccess.DoctorDataAccessManager;
 import org.iclick.doctor.dbaccess.PatientDataAccessManager;
-import org.iclick.doctor.jFrames.FrontDeskJFrame;
+import org.iclick.doctor.frontend.jFrames.FrontDeskJFrame;
 
 import java.awt.BorderLayout;
 import java.text.SimpleDateFormat;
@@ -34,7 +34,7 @@ public class AppointmentEditorJdialog extends javax.swing.JDialog implements Act
     private FrontDeskJFrame obj;
     private DbConnectionManager db = DbConnectionManager.getInstance();
     private PatientDataAccessManager patient_da = PatientDataAccessManager.getConnection(db);
-    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance(db);
+    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance();
     private Calendar currentDate = Calendar.getInstance(); //Get the current date
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //format it as per your requirement
     private String dateNow = formatter.format(currentDate.getTime());
@@ -409,8 +409,8 @@ public class AppointmentEditorJdialog extends javax.swing.JDialog implements Act
     public void addmodel() {
 
         ArrayList<String> doctors;
-        doctors = doctor_da.getnamestospecificarea(selectedsarea);
-        ddcount = doctor_da.getselecteddDoctorCount(selectedsarea);
+        doctors = doctor_da.getNamesToSpecificArea(selectedsarea);
+        ddcount = doctor_da.getSelectedDoctorCount(selectedsarea);
         int i;
         String temp;
         for (i = 0; i < ddcount; i++) {
