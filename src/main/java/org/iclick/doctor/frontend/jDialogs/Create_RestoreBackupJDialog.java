@@ -7,7 +7,7 @@
 package org.iclick.doctor.frontend.jDialogs;
 
 import org.iclick.doctor.utils.BackUpDataBase;
-import org.iclick.doctor.jFrames.DoctorJFrame;
+import org.iclick.doctor.frontend.jFrames.DoctorJFrame;
 
 import java.io.IOException;
 import java.util.logging.Level;

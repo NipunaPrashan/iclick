@@ -1,4 +1,4 @@
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.dbaccess.DbConnectionManager;
 import org.iclick.doctor.utils.Encrypt;
@@ -19,9 +19,9 @@ import javax.swing.JOptionPane;
  */
 public class LoginJFrame extends javax.swing.JFrame implements ActionListener {
 
-    PreparedStatement pst = null;
+    PreparedStatement preparedStatement = null;
     ResultSet rs = null;
-    DbConnectionManager conn;
+    DbConnectionManager connection;
     private int userid;
 
     public LoginJFrame() {
@@ -89,13 +89,12 @@ public class LoginJFrame extends javax.swing.JFrame implements ActionListener {
     private void loginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loginActionPerformed
         // TODO add your handling code here:
         String K = Encrypt.cryptWithMD5(Password.getText());
-        String sql = "Select * From user_login Where Username =? and Password=?";
+        String query = "Select * From user_login Where Username =? and Password=?";
         try {
-            conn = DbConnectionManager.getInstance();
-            pst = conn.getInstance().prepareStatement(sql);
-            pst.setString(1, user_name.getText());
+            DbConnectionManager.getInstance().getDbConnection().prepareStatement(query);
+            preparedStatement.setString(1, user_name.getText());
             /*--------------------------------------------------------*/
-            pst.setString(2, K);//this should be corrected to K
+            preparedStatement.setString(2, K);//this should be corrected to K
             //System.out.println(Password.getText());
             
            
@@ -107,9 +106,9 @@ public class LoginJFrame extends javax.swing.JFrame implements ActionListener {
             System.out.println(userType);
             String pass = K;
             try {
-                rs = pst.executeQuery();
+                rs = preparedStatement.executeQuery();
                // System.out.println(rs);
-            } catch (MySQLSyntaxErrorException e) {
+            } catch (SQLSyntaxErrorException e) {
                 System.out.println("Mu horek methanata adala na..");
             }
 

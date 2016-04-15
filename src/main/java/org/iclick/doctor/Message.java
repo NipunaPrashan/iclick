@@ -8,7 +8,7 @@ package org.iclick.doctor;
 
 import org.iclick.doctor.dbaccess.DbConnectionManager;
 import org.iclick.doctor.dbaccess.MessageDataAccessManager;
-import org.iclick.doctor.jFrames.DoctorJFrame;
+import org.iclick.doctor.frontend.jFrames.DoctorJFrame;
 
 import java.util.ArrayList;
 

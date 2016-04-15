@@ -24,7 +24,7 @@ import javax.swing.JOptionPane;
 public class FrontDesk extends User {
 
     private static DbConnectionManager dbCon = DbConnectionManager.getInstance();
-    private Statement st;
+    private Statement statement;
     private ResultSet rs;
 
     public FrontDesk(String name, int id, String paswrd) {
@@ -47,22 +47,22 @@ public class FrontDesk extends User {
     public void changePassword(String name, String oldpass, String newpass) {
 
         try {
-            st = dbCon.getInstance().createStatement();
+            statement = DbConnectionManager.getInstance().getDbConnection().createStatement();
             String dbpass = null;
-            String query = "UPDATE `user_login` SET `Password`='" + newpass + "' WHERE User_type ='" + name + "'";
-            String query2 = "SELECT Password FROM `user_login` WHERE User_type ='" + name + "' ";
+            String query = "UPDATE user_login SET Password='" + newpass + "' WHERE User_type ='" + name + "'";
+            String query2 = "SELECT Password FROM user_login WHERE User_type ='" + name + "' ";
 
-            rs = st.executeQuery(query2);
+            rs = statement.executeQuery(query2);
             System.out.println("Records from the database");
             while (rs.next()) {
                 dbpass = rs.getString("Password");
             }
             if (dbpass.equals(oldpass)) {
-                st.executeUpdate(query);
+                statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(new JDialog(), "Password Updated!");
             } else {
 
-                st.executeUpdate(query);
+                statement.executeUpdate(query);
                 JOptionPane.showMessageDialog(new JDialog(), "Enter the correct Current password");
             }
 

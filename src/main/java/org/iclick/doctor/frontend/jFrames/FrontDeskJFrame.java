@@ -1,4 +1,4 @@
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.*;
 import org.iclick.doctor.beans.User;
@@ -153,7 +153,7 @@ public class FrontDeskJFrame extends javax.swing.JFrame {
 		System.out.println("updating");
 		ArrayList<String> doctorList = new ArrayList<String>();
 		Doctor doctor = new Doctor(DoctorDataAccessManager.getInstance(), dateNow);
-		doctorList = doctor.getTodayDoctorList(DoctorMain.finalDay);
+		doctorList = doctor.getTodayDoctorList(Main.finalDay);
 
 		ArrayList<String> tempChannelList = new ArrayList<String>();
 		ArrayList<String> channelPatientId = new ArrayList<String>();

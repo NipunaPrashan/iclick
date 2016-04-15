@@ -19,7 +19,7 @@ import org.iclick.doctor.Doctor;
 import org.iclick.doctor.Patient;
 import org.iclick.doctor.dbaccess.DoctorDataAccessManager;
 import org.iclick.doctor.dbaccess.PatientDataAccessManager;
-import org.iclick.doctor.jFrames.FrontDeskJFrame;
+import org.iclick.doctor.frontend.jFrames.FrontDeskJFrame;
 
 /**
  *
@@ -34,7 +34,7 @@ public class AppointmentHandlerJDialog extends javax.swing.JDialog implements Ac
     private FrontDeskJFrame obj;
     private DbConnectionManager db = DbConnectionManager.getInstance();
     private PatientDataAccessManager patient_da = PatientDataAccessManager.getConnection(db);
-    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance(db);
+    private DoctorDataAccessManager doctor_da = DoctorDataAccessManager.getInstance();
 
     private Calendar currentDate = Calendar.getInstance(); //Get the current date
     private SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd"); //format it as per your requirement
@@ -520,8 +520,8 @@ public class AppointmentHandlerJDialog extends javax.swing.JDialog implements Ac
     public void addmodel() {
 
         ArrayList<String> doctors = new ArrayList<>();
-        doctors = doctor_da.getnamestospecificarea(selectedsarea);
-        ddcount = doctor_da.getselecteddDoctorCount(selectedsarea);
+        doctors = doctor_da.getNamesToSpecificArea(selectedsarea);
+        ddcount = doctor_da.getSelectedDoctorCount(selectedsarea);
         int i;
         String temp;
         for (i = 0; i < ddcount; i++) {
@@ -538,7 +538,7 @@ public class AppointmentHandlerJDialog extends javax.swing.JDialog implements Ac
 
         ArrayList<String> dates = new ArrayList<>();
         int datecount;
-        dates = doctor_da.getdates(selecteddoctorid);
+        dates = doctor_da.getDoctorAvailableTimes(selecteddoctorid);
         datecount = dates.size();
         System.out.println(datecount);
         int i;
@@ -561,13 +561,9 @@ public class AppointmentHandlerJDialog extends javax.swing.JDialog implements Ac
                     break;
                 }
             }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AppointmentHandlerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
+        } catch (ClassNotFoundException | InstantiationException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AppointmentHandlerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AppointmentHandlerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(AppointmentHandlerJDialog.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>

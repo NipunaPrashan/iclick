@@ -348,9 +348,6 @@ public class RegisterAPatientEditJDialog extends javax.swing.JDialog {
         // TODO add your handling code here:
     }//GEN-LAST:event_LastActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
     public void update() {
         ArrayList<String> det = new ArrayList<>();
         patientCount = patient_da.getPatientCount();

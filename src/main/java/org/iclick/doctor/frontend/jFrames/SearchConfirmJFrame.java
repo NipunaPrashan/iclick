@@ -1,4 +1,4 @@
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.dbaccess.DbConnectionManager;
 import org.iclick.doctor.Patient;

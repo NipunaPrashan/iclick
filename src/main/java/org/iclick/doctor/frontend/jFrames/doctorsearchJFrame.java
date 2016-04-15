@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package org.iclick.doctor.jFrames;
+package org.iclick.doctor.frontend.jFrames;
 
 import org.iclick.doctor.dbaccess.DoctorDataAccessManager;
 
@@ -186,20 +186,20 @@ public class doctorsearchJFrame extends javax.swing.JFrame {
         DoctorDataAccessManager dda = DoctorDataAccessManager.getInstance();
         
         if(speciality!="Any"&&name!=""){
-            list=dda.getdatatospecificnameandarea(speciality, name);
+            list=dda.getDataToSpecificNameAndArea(speciality, name);
             
         }
         else{
             if(speciality=="Any"){
-                list=dda.getdatatospecificname(name);
+                list=dda.getDataToSpecificName(name);
             }
             else{
-                list=dda.getdatatospecificarea(speciality);
+                list=dda.getDataToSpecificArea(speciality);
             }
             
         }
         
-        //list=dda.getdatatospecificarea(speciality);
+        //list=dda.getDataToSpecificArea(speciality);
         
         cleanTable();
 //        list.add("balla");

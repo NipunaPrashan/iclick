@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 package org.iclick.doctor;
-import org.iclick.doctor.jFrames.LoginJFrame;
+import org.iclick.doctor.frontend.jFrames.LoginJFrame;
 
 import java.text.DateFormat;
 import java.text.ParseException;
@@ -13,7 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import javax.swing.UnsupportedLookAndFeelException;
 
-public class DoctorMain {
+public class Main {
 
     public static String dateNow;
     public static String finalDay;

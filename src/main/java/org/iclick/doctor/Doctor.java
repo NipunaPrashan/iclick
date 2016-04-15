@@ -1,7 +1,6 @@
 package org.iclick.doctor;
 
 import org.iclick.doctor.beans.User;
-import org.iclick.doctor.dbaccess.DbConnectionManager;
 import org.iclick.doctor.dbaccess.DoctorDataAccessManager;
 import org.iclick.doctor.dbaccess.PatientDataAccessManager;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 public class Doctor extends User {
 
-    private DoctorDataAccessManager testd = DoctorDataAccessManager.getInstance(DbConnectionManager.getInstance());
+    private DoctorDataAccessManager doctorDAInstance = DoctorDataAccessManager.getInstance();
     private String date;
     private String first;
     private String last;
@@ -32,7 +31,7 @@ public class Doctor extends User {
 
     public Doctor(String name, int id, String paswrd, DoctorDataAccessManager testp) {
         super(name, id, paswrd);
-        this.testd = testp;
+        this.doctorDAInstance = testp;
 
     }
 
@@ -43,7 +42,7 @@ public class Doctor extends User {
 
     public Doctor(int id, DoctorDataAccessManager testp, String date) {
         super(id);
-        this.testd = testp;
+        this.doctorDAInstance = testp;
         this.date = date;
     }
 
@@ -55,7 +54,7 @@ public class Doctor extends User {
     }
 
     public Doctor(DoctorDataAccessManager testp, String date) {
-        this.testd = testp;
+        this.doctorDAInstance = testp;
         this.date = date;
         //  getList(testp,date);
     }
@@ -70,21 +69,21 @@ public class Doctor extends User {
 
     public Doctor(int pId, DoctorDataAccessManager testp) {
         super(pId);
-        this.testd = testp;
+        this.doctorDAInstance = testp;
     }
 
     public Doctor(String name, String paswrd, DoctorDataAccessManager testp) {
         super(name, paswrd);
-        this.testd = testp;
+        this.doctorDAInstance = testp;
     }
 
     public Doctor(String name, DoctorDataAccessManager testp) {
         super(name);
-        this.testd = testp;
+        this.doctorDAInstance = testp;
     }
 
     public void savedata(String first, String last, String hospital, String Qualification, String mobile1, String mobile2, int id, ArrayList<Integer> MID) {
-        testd.UpdateDoctorInfo(first, last, hospital, Qualification, mobile1, mobile2, id, MID);
+        doctorDAInstance.UpdateDoctorInfo(first, last, hospital, Qualification, mobile1, mobile2, id, MID);
     }
 
     public ArrayList<String> getList(DoctorDataAccessManager testp, int id) {
@@ -95,7 +94,7 @@ public class Doctor extends User {
 
     public String getpassword(int id) {
         String pass;
-        pass = testd.getDoctorPassword(id);
+        pass = doctorDAInstance.getDoctorPassword(id);
         return pass;
     }
 
@@ -143,24 +142,24 @@ public class Doctor extends User {
 
     public int getselecteddoctorid(String first, String last) {
         int id = -2;
-        id = testd.getDoctorId(first, last);
+        id = doctorDAInstance.getDoctorId(first, last);
         return id;
     }
 
     public void savedata() {
-        testd.registerDoctorInfo(first, last, getHospital(), getQualification(),spec);
+        doctorDAInstance.registerDoctorInfo(first, last, getHospital(), getQualification(), spec);
 
     }
     
     public ArrayList<String> getTodayDoctorList(String day) {
         ArrayList<String> list;
-        list = testd.getTodaylist(day);
+        list = doctorDAInstance.getTodaylist(day);
         return list;
     }
     
     public ArrayList<String> fillPatientTable(int did, String date) {
         ArrayList<String> list;
-        list = testd.getTodaypatientlist(did,date);
+        list = doctorDAInstance.getTodaypatientlist(did,date);
         return list;
     }
 
